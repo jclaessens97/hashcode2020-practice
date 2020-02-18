@@ -1,9 +1,4 @@
 import sys
-import numpy as np
-
-maxSlices = 0;
-number_of_types = 0;
-Ntypes = [];
 
 def read_file(filename):
     with open(filename, 'r') as f:
@@ -24,65 +19,27 @@ def checkMaxslice(maxSlices, number_of_types, Ntypes):
             count = count + i
             countS+=1
         pizzadick[i]=countS
-    writeFile(Ntypes,pizzadick)
+    write_file(output(Ntypes,pizzadick), count)
 
-def writeFile(Ntypes,pizzadick):
-    line = []
-    typeCount = 0
-    for t in Ntypes:
-        if t in pizzadick and pizzadick[t]>0:
-            typeCount += 1
-        line += str(pizzadick[t]) + ' '
-    outputArray(line, pizzadick)
-    print(line, typeCount, pizzadick)
+def write_file(output, count):
+    # print(output)
+    # print(count)
+    with open("output.txt", 'w') as f:
+        f.write('{}\n'.format(count))
+        f.write(' '.join([str(item) for item in output]) + '\n')
 
-def outputArray(line, pizzadick):
-    newArr = []
-    for i in line:
-        if i == 1:
-            newArr.append(pizzadick[i])
-    print(newArr)
-
-
-
-     # write typeCount
-     # write line
-
-# def rightplace(Ntypes,pizzadick):
-#     pizzadick
-#     with open("output.txt", 'w') as f:
-
-#         f.write('{}\n'.format(len(cutter.slices)))
-#         for slic in cutter.slices:
-#             f.write(' '.join([str(item) for item in slic]) + '\n')
-
-
-
-
-# print(str(count))
-# print(pizzadick)
-
-
-
-
-
-
-
-
-# read_file('data/a_example.in')
-
-
-# class Pizza:
-#     def init(self, pizzaType, number_of_slices):
-#         self.pizzaType = pizzaType
-#         self.number_of_slices = number_of_slices
-
+def output(Ntypes, pizzadick):
+    orderTypes = []
+    Ntypes.sort()
+    for i in range(len(Ntypes)):
+        if Ntypes[i] in pizzadick and pizzadick[Ntypes[i]] > 0:
+            orderTypes.append(i)
+    return orderTypes
 
 def main():
 #   pizza = Pizza(0, 3)
 #   pass
+    read_file('data/e_also_big.in')
 
-    read_file('data/a_example.in')
-
-if (name == 'main'):
-  main()
+if (__name__ == '__main__'):
+    main()
